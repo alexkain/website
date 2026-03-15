@@ -12,15 +12,20 @@ body {
   min-height: 100vh;
 }
 
+#navigation {
+  width: 250px;
+  flex-shrink: 0;
+}
+
 #verticalmenu {
+  position: fixed;
+  top: 35px;
   margin: 2em;
+  margin-top: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   list-style-type: none;
   text-align: right;
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 100;
 }
 
@@ -58,7 +63,15 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2em;
-  padding-left: 250px;
+  padding-left: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+#gallery,
+#content {
+  flex: 1;
+  min-width: 0;
 }
 
 a:link {
@@ -93,7 +106,7 @@ a:active {
 
 .imageframe {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   height: auto;
   display: block;
   margin-bottom: 2em;
@@ -204,6 +217,7 @@ a:active {
   }
 
   #wrap {
+    display: block;
     padding: 1em;
     padding-top: 4.5em;
   }
