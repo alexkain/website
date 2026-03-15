@@ -58,14 +58,11 @@ function goToSomeFun(e) {
 function getRandomVideo() {
   const videos = [
     "https://www.youtube.com/watch?v=HpVXIH24KzQ",
-    "https://www.youtube.com/watch?v=-bYBJAQ-_24",
     "https://www.youtube.com/watch?v=YbEOr5Weqb8",
-    "https://www.youtube.com/watch?v=6Ktc-8zagd0",
     "https://www.youtube.com/watch?v=OfZiANNhJrE",
     "https://www.youtube.com/watch?v=L-yxmCNkS30",
     "https://www.youtube.com/watch?v=io3-SzFyKKU",
     "https://www.youtube.com/watch?v=nVnNGDWJDKg",
-    "https://www.youtube.com/watch?v=qPyP_7Xuqr0",
     "https://www.youtube.com/watch?v=G-OVrI9x8Zs",
     "https://www.youtube.com/watch?v=XvSsGhXwsDY"
   ];
