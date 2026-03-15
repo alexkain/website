@@ -1,0 +1,215 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: left;
+  position: relative;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+#verticalmenu {
+  margin: 2em;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  list-style-type: none;
+  text-align: right;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+#verticalmenu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#verticalmenu li {
+  margin-bottom: 15px;
+}
+
+#verticalmenu ul li {
+  font-size: calc(1em + 4px);
+}
+
+#verticalmenu li i {
+  font-style: italic;
+  font-size: inherit;
+}
+
+.menu-title {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.menu-title a,
+.menu-title a:link,
+.menu-title a:visited {
+  text-decoration: overline !important;
+}
+
+#wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2em;
+  padding-left: 250px;
+}
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: overline;
+}
+
+a:focus {
+  color: black;
+  text-decoration: none;
+}
+
+a:active {
+  color: black;
+  text-decoration: overline;
+}
+
+.menu-title a:hover,
+.menu-title a:active {
+  text-decoration: overline;
+}
+
+.imageframe {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin-bottom: 2em;
+}
+
+/* Hide images that only have data-src (not yet loaded by lazy loader) */
+.imageframe[data-src]:not([src]) {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+}
+
+/* Mobile menu toggle button - hidden on desktop */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 0.5em;
+  color: black;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle.active {
+  transform: rotate(90deg);
+}
+
+.menu-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Responsive Design - Mobile */
+@media screen and (max-width: 768px) {
+  #verticalmenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 1000;
+    margin: 0;
+    padding: 1em;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* Show hamburger menu button on mobile */
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  /* Menu title with toggle button */
+  .menu-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+    margin-bottom: 0;
+    text-align: center;
+    position: relative;
+    line-height: 1;
+  }
+
+  .menu-toggle {
+    position: absolute;
+    left: 0;
+    line-height: 1;
+  }
+
+  .menu-toggle.active {
+    transform: rotate(90deg);
+  }
+
+  .menu-title a,
+  .menu-title a:link,
+  .menu-title a:visited {
+    text-decoration: overline !important;
+  }
+
+  /* Hide menu items by default on mobile */
+  .menu-items {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    text-align: left;
+    margin-top: 0.5em;
+  }
+
+  /* Show menu items when open */
+  .menu-items.open {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+  }
+
+  #verticalmenu li {
+    display: block;
+    margin: 0.5em 0;
+    font-size: 1.2em;
+  }
+
+  #verticalmenu li a {
+    display: block;
+    padding: 0.5em 0;
+  }
+
+  #wrap {
+    padding: 1em;
+    padding-top: 4.5em;
+  }
+
+  .imageframe {
+    max-width: 100%;
+  }
+}
+
