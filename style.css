@@ -53,6 +53,12 @@ body {
   margin-bottom: 15px;
 }
 
+.menu-title a,
+.menu-title a:link,
+.menu-title a:visited {
+  text-decoration: overline;
+}
+
 
 #wrap {
   max-width: 1200px;
