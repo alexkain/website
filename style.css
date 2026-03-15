@@ -112,12 +112,6 @@ a:active {
   margin-bottom: 2em;
 }
 
-/* Hide images that only have data-src (not yet loaded by lazy loader) */
-.imageframe[data-src]:not([src]) {
-  visibility: hidden;
-  height: 0;
-  margin: 0;
-}
 
 /* Mobile menu toggle button - hidden on desktop */
 .menu-toggle {

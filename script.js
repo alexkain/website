@@ -80,90 +80,53 @@ function loadGallery() {
   const galleryName = galleryContainer.dataset.gallery;
   const folder = galleryName;
 
-  // Determine prefix based on gallery name
   let prefix;
   if (galleryName === 'places') {
     prefix = 'place';
   } else if (galleryName === 'things') {
     prefix = 'thing';
   } else {
-    prefix = galleryName; // arctic and people use full name
+    prefix = galleryName;
   }
 
-  // Load images starting from 0, stopping when image fails to load
-  let imageIndex = 0;
+  const BATCH_SIZE = 20;
+  const MAX_IMAGES = 200;
+  const MAX_CONSECUTIVE_FAILURES = 10;
   let consecutiveFailures = 0;
-  const maxImages = 200; // Safety limit to prevent infinite loop
-  const maxConsecutiveFailures = 10; // Stop after 10 consecutive missing images
-  let isFirstImage = true;
+  const label = galleryName.charAt(0).toUpperCase() + galleryName.slice(1);
 
-  function loadNextImage() {
-    if (imageIndex >= maxImages || consecutiveFailures >= maxConsecutiveFailures) {
-      initLazyLoading();
-      return;
-    }
+  function loadBatch(startIndex) {
+    const count = Math.min(BATCH_SIZE, MAX_IMAGES - startIndex);
+    if (count <= 0) return;
 
-    const imagePath = `images/${folder}/${prefix}-${imageIndex}.jpg`;
-
-    // Check if image exists before adding to DOM
-    const testImg = new Image();
-    testImg.onload = function() {
-      // Image exists, create and add it to the gallery
-      consecutiveFailures = 0; // Reset failure counter
-
-      const img = document.createElement('img');
-      img.className = 'imageframe';
-      img.alt = `${galleryName.charAt(0).toUpperCase() + galleryName.slice(1)} photo ${imageIndex}`;
-
-      if (isFirstImage) {
-        img.src = imagePath;
-        img.loading = 'eager';
-        isFirstImage = false;
-      } else {
-        img.dataset.src = imagePath;
-        img.loading = 'lazy';
-      }
-      galleryContainer.appendChild(img);
-      imageIndex++;
-      loadNextImage(); // Try loading next image
-    };
-    testImg.onerror = function() {
-      // Image doesn't exist, try next one
-      consecutiveFailures++;
-      imageIndex++;
-      loadNextImage();
-    };
-    testImg.src = imagePath;
-  }
-
-  loadNextImage();
-}
-
-function initLazyLoading() {
-  // Use Intersection Observer for modern lazy loading
-  const images = document.querySelectorAll('img.imageframe[data-src]');
-
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.removeAttribute('data-src');
-          imageObserver.unobserve(img);
-        }
+    // Probe all images in the batch in parallel, reusing each probe img in the DOM
+    const probes = Array.from({ length: count }, (_, i) => {
+      const index = startIndex + i;
+      return new Promise(resolve => {
+        const img = new Image();
+        img.className = 'imageframe';
+        img.alt = `${label} photo ${index}`;
+        img.onload = () => resolve({ index, img, success: true });
+        img.onerror = () => resolve({ index, img: null, success: false });
+        img.src = `images/${folder}/${prefix}-${index}.jpg`;
       });
-    }, {
-      rootMargin: '50px 0px',
-      threshold: 0.01
     });
 
-    images.forEach(img => imageObserver.observe(img));
-  } else {
-    // Fallback for older browsers
-    images.forEach(img => {
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
+    Promise.all(probes).then(results => {
+      results.sort((a, b) => a.index - b.index);
+      for (const { img, success } of results) {
+        if (success) {
+          consecutiveFailures = 0;
+          galleryContainer.appendChild(img);
+        } else {
+          if (++consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) return;
+        }
+      }
+      if (consecutiveFailures < MAX_CONSECUTIVE_FAILURES) {
+        loadBatch(startIndex + BATCH_SIZE);
+      }
     });
   }
+
+  loadBatch(0);
 }
