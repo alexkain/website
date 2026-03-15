@@ -53,11 +53,6 @@ body {
   margin-bottom: 15px;
 }
 
-.menu-title a,
-.menu-title a:link,
-.menu-title a:visited {
-  text-decoration: overline !important;
-}
 
 #wrap {
   max-width: 1200px;
@@ -138,74 +133,109 @@ a:active {
 
 /* Responsive Design - Mobile */
 @media screen and (max-width: 768px) {
+  /* Hamburger widget: full-width white bar at bottom, items expand upward */
   #verticalmenu {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
+    top: auto;
+    width: 100%;
     background: white;
     z-index: 1000;
     margin: 0;
-    padding: 1em;
-    width: 100%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  /* Show hamburger menu button on mobile */
-  .menu-toggle {
-    display: inline-block;
-  }
-
-  /* Menu title with toggle button */
-  .menu-title {
+    padding: 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+    border-radius: 0;
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
-    font-size: 1.8em;
-    margin-bottom: 0;
-    line-height: 1;
   }
 
+  /* Hamburger button — plain, inside the white bar */
   .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     position: static;
     flex-shrink: 0;
+    font-size: calc(1em + 21px);
     line-height: 1;
-    font-size: 1em;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    margin: 0.4em 0;
   }
 
   .menu-toggle.active {
     transform: rotate(90deg);
   }
 
-  .menu-title a {
-    flex: 1;
-    text-align: center;
+  /* Hamburger wrapper */
+  .menu-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.8em;
+    margin-bottom: 0;
+    line-height: 1;
   }
 
+  /* ALEXKA.IN repositioned as a fixed top bar */
   .menu-title a,
   .menu-title a:link,
   .menu-title a:visited {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: white;
+    padding: 0.4em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 1.8em;
+    line-height: 1;
+    z-index: 1001;
     text-decoration: overline !important;
   }
 
-  /* Hide menu items by default on mobile */
-  .menu-items {
+  /* Menu items: full-width, expand upward, clipped reliably by overflow:hidden */
+  #verticalmenu .menu-items {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease-out, background-color 0.3s ease-out;
     text-align: left;
-    margin-top: 0.5em;
+    background-color: transparent;
+    padding: 0 1.5em;
   }
 
-  /* Show menu items when open */
-  .menu-items.open {
+  #verticalmenu .menu-items.open {
     max-height: 500px;
-    transition: max-height 0.5s ease-in;
+    transition: max-height 0.5s ease-in, background-color 0.5s ease-in;
+    background-color: white;
+    padding: 0.5em 1.5em;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+    margin-bottom: 0.5em;
   }
+
+  /* Reverse item order using CSS order property (avoids column-reverse overflow bug) */
+  #verticalmenu li:nth-child(1) { order: 6; }
+  #verticalmenu li:nth-child(2) { order: 5; }
+  #verticalmenu li:nth-child(3) { order: 4; }
+  #verticalmenu li:nth-child(4) { order: 3; }
+  #verticalmenu li:nth-child(5) { order: 2; }
+  #verticalmenu li:nth-child(6) { order: 1; }
 
   #verticalmenu li {
     display: block;
     margin: 0.5em 0;
-    font-size: 1.2em;
+    font-size: 1.8em;
   }
 
   #verticalmenu li a {
@@ -216,7 +246,8 @@ a:active {
   #wrap {
     display: block;
     padding: 1em;
-    padding-top: 4.5em;
+    padding-top: calc(93px + 1em);
+    padding-bottom: 5em;
   }
 
   .imageframe {
