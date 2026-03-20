@@ -156,6 +156,8 @@ a:active {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   /* Hamburger button — plain, inside the white bar */
@@ -206,6 +208,8 @@ a:active {
     line-height: 1;
     z-index: 1001;
     text-decoration: overline !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   /* Menu items: full-width, expand upward, clipped reliably by overflow:hidden */
