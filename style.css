@@ -149,6 +149,11 @@ a:active {
     justify-content: center;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+    transition: transform 0.3s ease;
+  }
+
+  #verticalmenu.hidden {
+    transform: translateY(100%);
   }
 
   /* ALEXKA.IN — fixed top bar */
