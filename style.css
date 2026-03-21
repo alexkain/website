@@ -115,7 +115,7 @@ a:active {
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: transform 0.3s ease;
+  transition: transform 0.1s ease;
 }
 
 .menu-toggle.active {
@@ -141,13 +141,12 @@ a:active {
     background: white;
     z-index: 1000;
     margin: 0;
-    padding: 0;
+    padding: 11px 0;
     border-radius: 0;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    padding: 0.5em 0;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
   }
@@ -162,7 +161,7 @@ a:active {
     margin: 0;
     text-align: center;
     background: white;
-    padding: 0.4em;
+    padding: 8px;
     font-size: 1.8em;
     line-height: 1;
     z-index: 1001;
@@ -204,7 +203,6 @@ a:active {
     align-self: stretch;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out, background-color 0.3s ease-out;
     text-align: left;
     background-color: transparent;
     padding: 0 1.5em;
@@ -212,7 +210,6 @@ a:active {
 
   #verticalmenu .menu-items.open {
     max-height: 500px;
-    transition: max-height 0.5s ease-in, background-color 0.5s ease-in;
     background-color: white;
     padding: 0.5em 1.5em;
     margin-bottom: 0.5em;
@@ -240,7 +237,7 @@ a:active {
   #wrap {
     display: block;
     padding: 1em;
-    padding-top: calc(52px + 2em);
+    padding-top: 45px;
     padding-bottom: 5em;
   }
 
