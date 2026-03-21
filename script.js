@@ -12,7 +12,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load gallery if on a gallery page
   loadGallery();
+
+  // Hide footer on scroll down, show on scroll up
+  initFooterScroll();
 });
+
+function initFooterScroll() {
+  const HIDE_THRESHOLD = 50;
+  let lastScrollY = window.scrollY;
+  let scrollDownDistance = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+    const menu = document.getElementById('verticalmenu');
+    const menuItems = document.getElementById('menuItems');
+
+    if (!menu) return;
+
+    // Don't hide while menu is open
+    if (menuItems && menuItems.classList.contains('open')) {
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (delta > 0) {
+      scrollDownDistance += delta;
+      if (scrollDownDistance > HIDE_THRESHOLD) {
+        menu.classList.add('hidden');
+      }
+    } else {
+      scrollDownDistance = 0;
+      menu.classList.remove('hidden');
+    }
+
+    lastScrollY = currentScrollY;
+  }, { passive: true });
+}
 
 function loadNavigation() {
   const navContainer = document.getElementById('navigation');
