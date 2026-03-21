@@ -248,6 +248,7 @@ a:active {
 
   .imageframe {
     max-width: 100%;
+    margin-bottom: 1em;
   }
 }
 
