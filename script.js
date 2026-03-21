@@ -19,19 +19,19 @@ function loadNavigation() {
   if (!navContainer) return;
 
   const menuHTML = `
-    <div id="verticalmenu">
-      <div class="menu-title">
-        <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
-        <a href="index.html">ALEXKA.IN</a>
+    <div id="nav-panel">
+      <a id="site-title" href="index.html">ALEXKA.IN</a>
+      <div id="verticalmenu">
+        <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu"></button>
+        <ul id="menuItems" class="menu-items">
+          <li><a href="arctic.html"><i>ARCTIC</i></a></li>
+          <li><a href="people.html"><i>PEOPLE</i></a></li>
+          <li><a href="places.html"><i>PLACES</i></a></li>
+          <li><a href="things.html"><i>THINGS</i></a></li>
+          <li><a href="holla.html">HOLLA@ME</a></li>
+          <li><a id="haveSomeFun" href="">HAVE SOME FUN</a></li>
+        </ul>
       </div>
-      <ul id="menuItems" class="menu-items">
-        <li><a href="arctic.html"><i>ARCTIC</i></a></li>
-        <li><a href="people.html"><i>PEOPLE</i></a></li>
-        <li><a href="places.html"><i>PLACES</i></a></li>
-        <li><a href="things.html"><i>THINGS</i></a></li>
-        <li><a href="holla.html">HOLLA@ME</a></li>
-        <li><a id="haveSomeFun" href="">HAVE SOME FUN</a></li>
-      </ul>
     </div>
   `;
 

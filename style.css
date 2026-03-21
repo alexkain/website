@@ -17,16 +17,26 @@ body {
   flex-shrink: 0;
 }
 
-#verticalmenu {
+#nav-panel {
   position: fixed;
   top: 35px;
   margin: 2em;
   margin-top: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
-  list-style-type: none;
   text-align: right;
   z-index: 100;
+}
+
+#site-title {
+  display: block;
+  font-size: 2em;
+  margin-bottom: 15px;
+  text-decoration: overline;
+}
+
+#verticalmenu {
+  padding: 0;
+  list-style-type: none;
 }
 
 #verticalmenu ul {
@@ -46,17 +56,6 @@ body {
 #verticalmenu li i {
   font-style: italic;
   font-size: inherit;
-}
-
-.menu-title {
-  font-size: 2em;
-  margin-bottom: 15px;
-}
-
-.menu-title a,
-.menu-title a:link,
-.menu-title a:visited {
-  text-decoration: overline;
 }
 
 
@@ -100,10 +99,6 @@ a:active {
   text-decoration: overline;
 }
 
-.menu-title a:hover,
-.menu-title a:active {
-  text-decoration: overline;
-}
 
 .imageframe {
   width: 100%;
@@ -117,13 +112,9 @@ a:active {
 /* Mobile menu toggle button - hidden on desktop */
 .menu-toggle {
   display: none;
-  background: none;
   border: none;
-  font-size: 1.5em;
   cursor: pointer;
   padding: 0;
-  margin-right: 0.5em;
-  color: black;
   transition: transform 0.3s ease;
 }
 
@@ -131,14 +122,14 @@ a:active {
   transform: rotate(90deg);
 }
 
-.menu-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 /* Responsive Design - Mobile */
 @media screen and (max-width: 768px) {
+  /* Revert nav-panel to normal flow so children can position independently */
+  #nav-panel {
+    position: static;
+    margin: 0;
+  }
+
   /* Hamburger widget: full-width white bar at bottom, items expand upward */
   #verticalmenu {
     position: fixed;
@@ -156,50 +147,20 @@ a:active {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    justify-content: center;
+    padding: 0.5em 0;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
   }
 
-  /* Hamburger button — plain, inside the white bar */
-  .menu-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: static;
-    flex-shrink: 0;
-    font-size: calc(1em + 21px);
-    line-height: 1;
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-    margin: 0.4em 0;
-  }
-
-  .menu-toggle.active {
-    transform: rotate(90deg);
-  }
-
-  /* Hamburger wrapper */
-  .menu-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    font-size: 1.8em;
-    margin-bottom: 0;
-    line-height: 1;
-  }
-
-  /* ALEXKA.IN repositioned as a fixed top bar */
-  .menu-title a,
-  .menu-title a:link,
-  .menu-title a:visited {
+  /* ALEXKA.IN — fixed top bar */
+  #site-title {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    margin: 0;
     text-align: center;
     background: white;
     padding: 0.4em;
@@ -207,9 +168,35 @@ a:active {
     font-size: 1.8em;
     line-height: 1;
     z-index: 1001;
-    text-decoration: overline !important;
+    text-decoration: overline;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+  }
+
+  /* Hamburger button — plain, inside the bottom bar */
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    flex-shrink: 0;
+    width: 24px;
+    height: 18px;
+    border-radius: 0;
+    background-color: transparent;
+    background-image:
+      linear-gradient(black, black),
+      linear-gradient(black, black),
+      linear-gradient(black, black);
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    background-position: 0 0, 0 50%, 0 100%;
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .menu-toggle.active {
+    transform: rotate(90deg);
   }
 
   /* Menu items: full-width, expand upward, clipped reliably by overflow:hidden */
@@ -230,7 +217,6 @@ a:active {
     transition: max-height 0.5s ease-in, background-color 0.5s ease-in;
     background-color: white;
     padding: 0.5em 1.5em;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
     margin-bottom: 0.5em;
   }
 
@@ -256,7 +242,7 @@ a:active {
   #wrap {
     display: block;
     padding: 1em;
-    padding-top: calc(93px + 1em);
+    padding-top: calc(52px + 2em);
     padding-bottom: 5em;
   }
 
