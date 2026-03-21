@@ -142,7 +142,6 @@ a:active {
     z-index: 1000;
     margin: 0;
     padding: 0;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
     border-radius: 0;
     display: flex;
     flex-direction: column-reverse;
@@ -164,7 +163,6 @@ a:active {
     text-align: center;
     background: white;
     padding: 0.4em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     font-size: 1.8em;
     line-height: 1;
     z-index: 1001;
